@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,7 +8,6 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
     [SerializeField] GameObject[] objectSpawners;
     [SerializeField] GameObject turret;
 
@@ -17,8 +17,14 @@ public class GameManager : MonoBehaviour
     }
     private void OnEnable()
     {
+    
         InititilizeGameState(false);
     }
+    private void OnDisable()
+    {
+ 
+    }
+   
     public void StartGame()
     {
         InititilizeGameState(true);
@@ -35,7 +41,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-
     private void InititilizeGameState(bool state)
     {
         foreach (GameObject obj in objectSpawners)

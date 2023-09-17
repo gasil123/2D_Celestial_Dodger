@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject.name);
         var enemyScript = collision.gameObject.GetComponent<EnemyShip>();
         var soldierScript = collision.gameObject.GetComponent<SoldierController>();
         enemyScript?.Die();

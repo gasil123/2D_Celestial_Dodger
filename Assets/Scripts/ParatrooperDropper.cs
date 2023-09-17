@@ -24,20 +24,16 @@ public class ParatrooperDropper : MonoBehaviour
     {      
         bool dropTwo = Random.Range(0f, 1f) <= doubleDropChance;
         yield return new WaitForSeconds(dropInterval);
-       
-        print("dropstart");
         if (dropTwo)
         {
             for (int i = 0; i < 2; i++)
             {
-                print("dropping 2 troopers");
                 SpawnSoldier();
                 yield return new WaitForSeconds(0.5f);
             }
         }
         else
         {
-            print("dropping 1 trooper");
             bool dropParatrooper = Random.Range(0f, 1f) <= paratrooperDropChance;
 
             if (dropParatrooper)

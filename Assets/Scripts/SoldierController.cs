@@ -25,7 +25,8 @@ public class SoldierController : MonoBehaviour
     {
         IdleAnimation();
         JumpAnimation();
-        _rb.centerOfMass = foot.localPosition;
+       // _rb.centerOfMass = foot.localPosition;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
     private void IdleAnimation()
     {

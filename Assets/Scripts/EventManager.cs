@@ -2,7 +2,9 @@ using UnityEngine;
 using System;
 public class EventManager : MonoBehaviour
 {
-    public static event Action gameOver;
-    public static event Action gameUp;
-    public static event Action enemyDead;
+    public static  Action gameOver;
+    public static  Action gameUp;
+    public static  Action enemyDead;
+    public static  Action enemyMoreThanTarget;
+    public static  Action StartEnemyAttack;
 }

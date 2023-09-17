@@ -9,6 +9,9 @@ TagManager:
   - Soldier1
   - Soldier2
   - Ground
+  - GameOverCapsules
+  - GameOver
+  - asd
   layers:
   - Default
   - TransparentFX
