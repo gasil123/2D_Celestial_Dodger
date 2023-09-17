@@ -3,46 +3,59 @@ using UnityEngine;
 
 public class ParatrooperDropper : MonoBehaviour
 {
-    public GameObject paratrooperPrefab;
-    public float minDropInterval = 0.5f;
-    public float maxDropInterval = 2.5f;
-    public float doubleDropChance = 0.1f;
-    float paratrooperDropChance; // 40% chance for paratrooper to drop
-    private float dropInterval;
+    [SerializeField] string[] soldierNames;
+    [SerializeField] float minDropInterval = 0.5f;
+    [SerializeField] float maxDropInterval = 2f;
+    [SerializeField] float doubleDropChance = 0.1f;
+    [SerializeField] float dropInterval;
+    [SerializeField] float minimumDropchance = 0.3f;
+    [SerializeField] float maximumDropchance = 0.55f;
+
+    float paratrooperDropChance;
+    int randomParatrooper;
     private void OnEnable()
     {
-        paratrooperDropChance = Random.Range(0.5f, 0.55f);
-        StartCoroutine(DropParatroopers());
+        paratrooperDropChance = Random.Range(minimumDropchance, maximumDropchance);
+        randomParatrooper = Random.Range(0, soldierNames.Length);
         dropInterval = Random.Range(minDropInterval, maxDropInterval);
+        StartCoroutine(DropParatroopers());
     }
     private IEnumerator DropParatroopers()
-    {
-        // Calculate random X position and drop interval for each drop
-        yield return new WaitForSeconds(dropInterval); // Delay before each drop
-        // Determine if you will drop two paratroopers
+    {      
         bool dropTwo = Random.Range(0f, 1f) <= doubleDropChance;
         yield return new WaitForSeconds(dropInterval);
-        // Check if the plane's position matches the random X position
+       
         print("dropstart");
         if (dropTwo)
         {
             for (int i = 0; i < 2; i++)
             {
                 print("dropping 2 troopers");
-                Instantiate(paratrooperPrefab, transform.position, Quaternion.identity);
+                SpawnSoldier();
+                yield return new WaitForSeconds(0.5f);
             }
         }
         else
         {
-            print("dropping 1 troopers");
-
-            // Determine if the single paratrooper drops (40% chance)
+            print("dropping 1 trooper");
             bool dropParatrooper = Random.Range(0f, 1f) <= paratrooperDropChance;
 
             if (dropParatrooper)
             {
-                Instantiate(paratrooperPrefab, transform.position, Quaternion.identity);
+                SpawnSoldier();
             }
         }
+    }
+    private void SpawnSoldier()
+    {
+        GameObject soldier = GetSoldier();
+        soldier.transform.position = transform.position;
+        soldier.transform.rotation = Quaternion.identity;
+        soldier.SetActive(true);
+    }
+    private GameObject GetSoldier()
+    {
+        GameObject soldier = ObjectPool.SharedInstance.GetPooledObject(soldierNames[randomParatrooper]);
+        return soldier;
     }
 }

@@ -1,22 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    int range;
+    [SerializeField] float minimumTimeForRepeatedFlightSpawning = 2;
+    [SerializeField] float maximumTimeForRepeatedFlightSpawning = 5;
+
+    float range;
     private int num;
     [SerializeField] List<string> pooledObjects;
     private void Start()
     {
-        range = Random.Range(2, 5);
+        range = Random.Range(minimumTimeForRepeatedFlightSpawning, maximumTimeForRepeatedFlightSpawning);
         InvokeRepeating("SpawnObjects", 5, range);
     }
     public void SpawnObjects()
     {
         num = Random.Range(0, pooledObjects.Count);
-        GameObject obj =  ObjectPool.SharedInstance.GetPooledObject(pooledObjects[0]);
+        GameObject obj =  ObjectPool.SharedInstance.GetPooledObject(pooledObjects[num]);
         obj.transform.position = transform.position;
         obj.transform.rotation = transform.rotation;
         obj.SetActive(true);

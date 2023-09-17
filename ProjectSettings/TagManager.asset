@@ -6,11 +6,14 @@ TagManager:
   tags:
   - Bullet
   - plane
+  - Soldier1
+  - Soldier2
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

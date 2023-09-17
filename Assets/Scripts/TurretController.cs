@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Xml.Serialization;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class TurretController : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 30f;
@@ -21,14 +20,13 @@ public class TurretController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         fireEffectAnimator = fireEffect.GetComponent<Animator>();
     }
-    void Update()
+    void FixedUpdate()
     {
-        GetInputs();
         RotateTurret();
     }
-    private void GetInputs()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        rotationInput = Input.GetAxis("Horizontal");
+        rotationInput = context.ReadValue<Vector2>().x;
     }
     private void RotateTurret()
     {
@@ -49,7 +47,7 @@ public class TurretController : MonoBehaviour
         //    fireEffectAnimator.GetComponent<Animator>().SetTrigger("shootEffect");
         //    yield return new WaitForSeconds(2);
         //}
-
+        Audiomanager.instance._turretFire.Play();
         GameObject _bullets = GetBullet();
         _bullets.GetComponent<Projectile>().SetProjectileDirection(transform.up);
         fireEffectAnimator.GetComponent<Animator>().SetTrigger("shootEffect");
