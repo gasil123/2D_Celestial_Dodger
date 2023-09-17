@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    int range;
     private int num;
     [SerializeField] List<string> pooledObjects;
     private void Start()
     {
-        InvokeRepeating("SpawnObjects", 5, 2);
+        range = Random.Range(2, 5);
+        InvokeRepeating("SpawnObjects", 5, range);
     }
     public void SpawnObjects()
     {
-        Debug.Log("spawning");
         num = Random.Range(0, pooledObjects.Count);
         GameObject obj =  ObjectPool.SharedInstance.GetPooledObject(pooledObjects[0]);
         obj.transform.position = transform.position;

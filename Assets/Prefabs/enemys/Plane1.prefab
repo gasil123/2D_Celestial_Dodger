@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1292059600564356400}
   - component: {fileID: 891060884035361727}
   - component: {fileID: 5308489519196797719}
+  - component: {fileID: 5300654941795612456}
   m_Layer: 0
   m_Name: Plane1
   m_TagString: plane
@@ -165,6 +166,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.032686517, y: 0.051755905}
   m_Size: {x: 1.2153755, y: 0.4036506}
   m_Direction: 1
+--- !u!114 &5300654941795612456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426114643813374363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3eb14eed0e004944bdbe6f0bbccd508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paratrooperPrefab: {fileID: 1117223618754881365, guid: c0ef4dc5bdaf63b48850361f5e7c7076, type: 3}
+  minDropInterval: 0.5
+  maxDropInterval: 2.5
+  doubleDropChance: 0.1
 --- !u!1 &5430666423941614398
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +272,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.17857143, y: 0.028571403, z: 0}
-  m_LocalScale: {x: 4.12, y: 4.12, z: 4.12}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4345043600256349284}
