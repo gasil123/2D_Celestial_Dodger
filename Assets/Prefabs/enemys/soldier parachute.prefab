@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5124047965716407488}
   - component: {fileID: 5773298318179299798}
   - component: {fileID: 7404283129880079630}
-  - component: {fileID: 7777506892126327157}
+  - component: {fileID: 514471520383791372}
   m_Layer: 0
   m_Name: soldier parachute
   m_TagString: Untagged
@@ -149,7 +149,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.20217597, y: 1.4883709}
   m_Size: {x: 5.580644, y: 9.826303}
   m_Direction: 0
---- !u!114 &7777506892126327157
+--- !u!114 &514471520383791372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,6 +158,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117223618754881365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d441d285db03f9443bdcde2dab179110, type: 3}
+  m_Script: {fileID: 11500000, guid: f35579ba20ef65a4fb4e3ed86f6a5c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
