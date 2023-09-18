@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d0a2b4044854eed4bbebb1d8c801d853
+guid: 5d965a3200c0f5041b682dc0aaa4c401
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: circlepadset-svg_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 83
+        width: 59
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da55778d9b27886439528fe0e373db38
+      internalID: -1613598215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: circlepadset-svg_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 101
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f6c634cfe743840b75a13fff73677d
+      internalID: -1723379309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: circlepadset-svg_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 16
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8e9f49b95d1e554ab79b97aa04f8e0a
+      internalID: -226001854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: circlepadset-svg_3
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 34
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5844ae425fa20d49abde7cf411ce9da
+      internalID: -265958761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +216,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      circlepadset-svg_0: -1613598215
+      circlepadset-svg_1: -1723379309
+      circlepadset-svg_2: -226001854
+      circlepadset-svg_3: -265958761
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

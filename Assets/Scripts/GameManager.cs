@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -7,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] GameObject[] objectSpawners;
     [SerializeField] GameObject turret;
-    
-
+    [SerializeField] Light2D _globalLight;
+    [SerializeField] float smoothTime;
     private void Awake()
     {
         Instance = this;
@@ -42,11 +43,18 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PauseGame();
+        _globalLight.color = Color.Lerp(_globalLight.color, Color.red, 1f);
         Audiomanager.instance.PlayGameOver();
         CanvasManager.instance.GameOverPanel(true);
     }
     public void StartLevel1()
     {
+        SceneManager.LoadScene(1);
+    }
+    public void RetryLevel1()
+    {
+        Audiomanager.instance.StopGameOver();
+        Audiomanager.instance.playBGM();
         SceneManager.LoadScene(1);
     }
     private void InititilizeGameState(bool state)
@@ -65,5 +73,9 @@ public class GameManager : MonoBehaviour
             turret.GetComponent<TurretController>().enabled = !state;
             turret.GetComponent<PlayerInput>().enabled = !state;
         }
+    }
+    public void QuitApplication() 
+    {
+        Application.Quit();
     }
 }

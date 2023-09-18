@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -12,6 +10,7 @@ public class Audiomanager : MonoBehaviour
     [SerializeField] AudioSource _gameOver;
     public AudioSource _turretFire;
 
+    
     public void SetMusicVolume(float volume)
     {
         _mixer.SetFloat("_BGMParameter", Mathf.Log10(volume) * 20);
@@ -24,6 +23,7 @@ public class Audiomanager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {

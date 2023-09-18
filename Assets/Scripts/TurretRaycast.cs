@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretRaycast : MonoBehaviour
@@ -13,8 +10,8 @@ public class TurretRaycast : MonoBehaviour
     public int numberOfEnemyHitOnRight;
     public int numberOfEnemyHitOnLeft;
     private bool CanSearchForEnemycount = true;
-    private bool enemiesMoving = false; // Flag to check if enemies are currently moving
-    private bool canMovie = true; // Flag to check if enemies are currently moving
+    private bool enemiesMoving = false; 
+    private bool canMovie = true;
 
     private void Update()
     {
@@ -45,7 +42,7 @@ public class TurretRaycast : MonoBehaviour
     private IEnumerator MoveEnemiesToHelpers()
     {
         yield return new WaitForSeconds(4f);
-        enemiesMoving = true; // Set the flag to indicate that enemies are moving
+        enemiesMoving = true;
 
         if (numberOfEnemyHitOnLeft >= _maximumEnemyForGameOver)
         {
@@ -56,13 +53,8 @@ public class TurretRaycast : MonoBehaviour
            StartCoroutine( MoveEnemiesToHelpers(enemyClimbHelpersRight, transform.right));
         }
 
-        // Wait for all enemies to reach their destinations
         yield return new WaitForSeconds(10f);
-
-        // At this point, all enemies have reached their destinations
-        // You can perform any required logic here
-
-        enemiesMoving = false; // Reset the flag to indicate that enemies have stopped moving
+        enemiesMoving = false;
         canMovie = false;
     }
 
@@ -74,7 +66,6 @@ public class TurretRaycast : MonoBehaviour
         {
             Collider2D colliderToMove = null;
 
-            // Iterate through the hits to find the first game object with the "Soldier1" tag
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider.CompareTag("Soldier1"))
@@ -83,8 +74,6 @@ public class TurretRaycast : MonoBehaviour
                     break;
                 }
             }
-
-            // Check if we found a game object with the "Soldier1" tag
             if (colliderToMove != null)
             {
                 helperPositions[i].SetActive(true);
@@ -108,8 +97,6 @@ public class TurretRaycast : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Ensure the collider ends up exactly at the target position
         colliderToMove.transform.position = targetPosition;
         colliderToMove.transform.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         colliderToMove.transform.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;

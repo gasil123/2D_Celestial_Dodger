@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameOverTrigger : MonoBehaviour
 {
@@ -42,7 +40,7 @@ public class GameOverTrigger : MonoBehaviour
     }
     IEnumerator InvokeGameOver()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         EventManager.gameOver?.Invoke();
     }
 }

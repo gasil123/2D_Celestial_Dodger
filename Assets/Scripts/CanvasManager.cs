@@ -11,13 +11,17 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] GameObject pauseMenuPanel;
     [SerializeField] GameObject gameOverPanel;
     public Slider healthSlider;
+
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider SfxSlider;
+    [SerializeField] Toggle muteToggle;
     private void Awake()
     {
         instance = this;
     }
     private void Start()
     {
-        healthSlider.value = 100;
+        if(healthSlider!=null)healthSlider.value = 100;
         if (startPanlel != null) startPanlel.SetActive(true);
         if(SceneManager.GetActiveScene().buildIndex == 1) 
         {
@@ -29,6 +33,12 @@ public class CanvasManager : MonoBehaviour
         }
         pauseMenuPanel.SetActive(false);
         if(gameOverPanel!=null)gameOverPanel.SetActive(false);
+        if (musicSlider != null  && SfxSlider!= null && muteToggle!=null)
+        {
+            musicSlider.onValueChanged.AddListener(Audiomanager.instance.SetMusicVolume);
+            SfxSlider.onValueChanged.AddListener(Audiomanager.instance.SetSfxVolume);
+            muteToggle.onValueChanged.AddListener(Audiomanager.instance.MuteUnmute);
+        }
     }
     public void PauseMenu(bool state)
     {
