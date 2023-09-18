@@ -1994,6 +1994,10 @@ MonoBehaviour:
   musicSlider: {fileID: 0}
   SfxSlider: {fileID: 0}
   muteToggle: {fileID: 0}
+  _planeDestroyedScore: 10
+  _enemyDestroyedScore: 15
+  _bulletCost: 1
+  scoreText: {fileID: 0}
 --- !u!1 &951081111
 GameObject:
   m_ObjectHideFlags: 0

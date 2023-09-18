@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -15,12 +16,35 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider SfxSlider;
     [SerializeField] Toggle muteToggle;
+
+    [SerializeField] int _planeDestroyedScore = 10;
+    [SerializeField] int _enemyDestroyedScore = 15;
+    [SerializeField] int _bulletCost = 2;
+
+    private const int score = 0;
+    private  int currentScore = 0;
+    [SerializeField] TextMeshProUGUI scoreText;
     private void Awake()
     {
         instance = this;
     }
+    private void OnEnable()
+    {
+        EventManager.planeDestroyed += UpdateScoreTextOnPlaneHit;
+        EventManager.enemyDestroyed += UpdateScoreTextOnEnemyHit;
+        EventManager.bulletfired += UpdateScoreTextOnBulletFired;
+    }
+    private void OnDisable()
+    {
+
+        EventManager.planeDestroyed -= UpdateScoreTextOnPlaneHit;
+        EventManager.enemyDestroyed -= UpdateScoreTextOnEnemyHit;
+        EventManager.bulletfired -= UpdateScoreTextOnBulletFired;
+    }
     private void Start()
     {
+        currentScore = score;
+        if (scoreText != null) { scoreText.text = $"score: {currentScore}";  }
         if(healthSlider!=null)healthSlider.value = 100;
         if (startPanlel != null) startPanlel.SetActive(true);
         if(SceneManager.GetActiveScene().buildIndex == 1) 
@@ -60,5 +84,19 @@ public class CanvasManager : MonoBehaviour
         gamePanel.SetActive(!state);
         pauseMenuPanel.SetActive(!state);
         if (startPanlel != null) startPanlel.SetActive(!state);
+    }
+
+    private void UpdateScoreTextOnPlaneHit()
+    {
+        Debug.Log("Updating score plane hit");
+        scoreText.text = (currentScore += _planeDestroyedScore).ToString(); 
+    } 
+    private void UpdateScoreTextOnEnemyHit()
+    {
+        scoreText.text = (currentScore += _enemyDestroyedScore).ToString(); 
+    }
+    private void UpdateScoreTextOnBulletFired()
+    {
+        scoreText.text = (currentScore -= _bulletCost).ToString(); 
     }
 }

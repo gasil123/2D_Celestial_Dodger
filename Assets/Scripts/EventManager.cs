@@ -3,8 +3,8 @@ using System;
 public class EventManager : MonoBehaviour
 {
     public static  Action gameOver;
-    public static  Action gameUp;
-    public static  Action enemyDead;
+    public static  Action enemyDestroyed;
+    public static  Action planeDestroyed;
     public static  Action enemyMoreThanTarget;
-    public static  Action StartEnemyAttack;
+    public static  Action bulletfired;
 }

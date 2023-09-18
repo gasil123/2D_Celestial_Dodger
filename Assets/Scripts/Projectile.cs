@@ -17,8 +17,21 @@ public class Projectile : MonoBehaviour
     {
         var enemyScript = collision.gameObject.GetComponent<EnemyShip>();
         var soldierScript = collision.gameObject.GetComponent<SoldierController>();
-        enemyScript?.Die();
-        soldierScript?.Die();
-        gameObject.SetActive(false);
+        if (enemyScript != null)
+        {
+            EventManager.planeDestroyed?.Invoke();
+            enemyScript?.Die();
+            Debug.Log("Enemy Destroyed");
+        } 
+        else if (soldierScript != null)
+        {
+            EventManager.enemyDestroyed?.Invoke();
+            soldierScript?.Die();
+            Debug.Log("Enemy Destroyed");
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
