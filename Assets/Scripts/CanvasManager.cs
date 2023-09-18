@@ -23,7 +23,9 @@ public class CanvasManager : MonoBehaviour
 
     private const int score = 0;
     private  int currentScore = 0;
+    private  int topScore = 0;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI topScoreText;
     private void Awake()
     {
         instance = this;
@@ -44,9 +46,12 @@ public class CanvasManager : MonoBehaviour
     private void Start()
     {
         currentScore = score;
-        if (scoreText != null) { scoreText.text = $"score: {currentScore}";  }
-        if(healthSlider!=null)healthSlider.value = 100;
+        topScore = PlayerPrefs.GetInt("HighScore");
+        if (topScoreText!=null) topScoreText.text = topScore.ToString();
+        if (scoreText != null) scoreText.text = currentScore.ToString();
+        if (healthSlider!=null) healthSlider.value = 100;
         if (startPanlel != null) startPanlel.SetActive(true);
+        if (gameOverPanel!=null)gameOverPanel.SetActive(false);
         if(SceneManager.GetActiveScene().buildIndex == 1) 
         {
             gamePanel.SetActive(true);
@@ -56,7 +61,6 @@ public class CanvasManager : MonoBehaviour
             gamePanel.SetActive(false);
         }
         pauseMenuPanel.SetActive(false);
-        if(gameOverPanel!=null)gameOverPanel.SetActive(false);
         if (musicSlider != null  && SfxSlider!= null && muteToggle!=null)
         {
             musicSlider.onValueChanged.AddListener(Audiomanager.instance.SetMusicVolume);
@@ -89,14 +93,25 @@ public class CanvasManager : MonoBehaviour
     private void UpdateScoreTextOnPlaneHit()
     {
         Debug.Log("Updating score plane hit");
-        scoreText.text = (currentScore += _planeDestroyedScore).ToString(); 
+        scoreText.text = (currentScore += _planeDestroyedScore).ToString();
+        UpdateHighScore();
     } 
     private void UpdateScoreTextOnEnemyHit()
     {
-        scoreText.text = (currentScore += _enemyDestroyedScore).ToString(); 
+        scoreText.text = (currentScore += _enemyDestroyedScore).ToString();
+        UpdateHighScore();
     }
     private void UpdateScoreTextOnBulletFired()
     {
         scoreText.text = (currentScore -= _bulletCost).ToString(); 
+    }
+    private void UpdateHighScore()
+    {
+        if (currentScore > topScore)
+        {
+            topScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", topScore);
+            if (topScoreText != null) topScoreText.text = topScore.ToString();
+        }
     }
 }

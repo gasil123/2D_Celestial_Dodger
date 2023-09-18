@@ -29,9 +29,6 @@ public class Projectile : MonoBehaviour
             soldierScript?.Die();
             Debug.Log("Enemy Destroyed");
         }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }

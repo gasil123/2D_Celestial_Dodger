@@ -7,8 +7,8 @@ public class TurretController : MonoBehaviour
     [SerializeField] float maxRotationAngle = 0f;
     [SerializeField] Transform barrelTransform;
     [SerializeField] GameObject fireEffect;
-
-    public bool Automode = false;
+    [SerializeField] PlayerInput _playerInput;
+    private InputAction shootAction;
 
     private Rigidbody2D rb;
     private float currentRotation;
@@ -19,6 +19,15 @@ public class TurretController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         fireEffectAnimator = fireEffect.GetComponent<Animator>();
+    }
+    private void OnEnable()
+    {
+        shootAction = _playerInput.actions["Fire"];
+        shootAction.performed += _ => Shoot();
+    }
+    private void OnDisable()
+    {
+        shootAction.performed -= _ => Shoot();
     }
     void FixedUpdate()
     {
@@ -40,13 +49,6 @@ public class TurretController : MonoBehaviour
     }
     IEnumerator StartShooting()
     {
-        //while (Automode)
-        //{
-        //    GameObject _bullet = GetBullet();
-        //    _bullet.GetComponent<Projectile>().SetProjectileDirection(transform.up);
-        //    fireEffectAnimator.GetComponent<Animator>().SetTrigger("shootEffect");
-        //    yield return new WaitForSeconds(2);
-        //}
         EventManager.bulletfired?.Invoke();
         Audiomanager.instance._turretFire.Play();
         GameObject _bullets = GetBullet();

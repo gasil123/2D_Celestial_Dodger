@@ -248,7 +248,7 @@ Transform:
   m_GameObject: {fileID: 32641328}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -188.80603, y: -121.8659, z: 2.148114}
+  m_LocalPosition: {x: -187.72, y: -121.8659, z: 2.148114}
   m_LocalScale: {x: 1, y: 3.2216206, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1349,8 +1349,8 @@ RectTransform:
   m_GameObject: {fileID: 771253305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.68, y: 0.68, z: 0.68}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 218422207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1998,6 +1998,7 @@ MonoBehaviour:
   _enemyDestroyedScore: 15
   _bulletCost: 1
   scoreText: {fileID: 0}
+  topScoreText: {fileID: 0}
 --- !u!1 &951081111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,7 +2644,7 @@ MonoBehaviour:
   maxRotationAngle: 80
   barrelTransform: {fileID: 185012919}
   fireEffect: {fileID: 1801058221}
-  Automode: 0
+  _playerInput: {fileID: 0}
 --- !u!61 &1657311625
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3196,9 +3197,9 @@ Transform:
   m_GameObject: {fileID: 2052922351}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1938, y: 0.218, z: 10}
-  m_LocalScale: {x: 1.2059808, y: 1.1237876, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.0373, y: 0.47, z: 10}
+  m_LocalScale: {x: 1.2716781, y: 1.067823, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3379,7 +3380,7 @@ Transform:
   m_GameObject: {fileID: 2114800735}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -207.88603, y: -121.8659, z: 2.148114}
+  m_LocalPosition: {x: -209.07, y: -121.8659, z: 2.148114}
   m_LocalScale: {x: 1, y: 3.2216206, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

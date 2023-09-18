@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PauseGame();
-        _globalLight.color = Color.Lerp(_globalLight.color, Color.red, 1f);
+        _globalLight.color = Color.Lerp(_globalLight.color, Color.red, 2f);
         Audiomanager.instance.PlayGameOver();
         CanvasManager.instance.GameOverPanel(true);
     }
