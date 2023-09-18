@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,7 +21,10 @@ public class GameManager : MonoBehaviour
     {
         EventManager.gameOver -= GameOver;
     }
-   
+    private void Start()
+    {
+        PlayGame();
+    }
     public void StartGame()
     {
         InititilizeGameState(true);
@@ -43,7 +42,12 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PauseGame();
+        Audiomanager.instance.PlayGameOver();
         CanvasManager.instance.GameOverPanel(true);
+    }
+    public void StartLevel1()
+    {
+        SceneManager.LoadScene(1);
     }
     private void InititilizeGameState(bool state)
     {
@@ -51,7 +55,15 @@ public class GameManager : MonoBehaviour
         {
             obj.SetActive(state);
         }
-        turret.GetComponent<TurretController>().enabled = state;
-        turret.GetComponent<PlayerInput>().enabled = state;
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            turret.GetComponent<TurretController>().enabled = state;
+            turret.GetComponent<PlayerInput>().enabled = state;
+        }
+        else
+        {
+            turret.GetComponent<TurretController>().enabled = !state;
+            turret.GetComponent<PlayerInput>().enabled = !state;
+        }
     }
 }

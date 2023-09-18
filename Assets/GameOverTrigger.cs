@@ -8,7 +8,7 @@ public class GameOverTrigger : MonoBehaviour
     [SerializeField] GameObject explosion;
     public const int health = 100;
     private int currentHealth;
-    private int currentHealthDecreaseValue = 50;
+    private int currentHealthDecreaseValue = 100;
     private void Start()
     {
         currentHealth = health;
@@ -37,7 +37,12 @@ public class GameOverTrigger : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth < 10)
         {
-            EventManager.gameOver?.Invoke();
+            StartCoroutine(InvokeGameOver());
         }
+    }
+    IEnumerator InvokeGameOver()
+    {
+        yield return new WaitForSeconds(2);
+        EventManager.gameOver?.Invoke();
     }
 }

@@ -48,6 +48,7 @@ public class Audiomanager : MonoBehaviour
     }
     public void PlayGameOver()
     {
+        stopBGM();
         _gameOver.Play();
     }
     public void StopGameOver()
