@@ -24,7 +24,7 @@ public class TurretRaycast : MonoBehaviour
                 numberOfEnemyHitOnLeft >= _maximumEnemyForGameOver)
             {
                 EventManager.enemyMoreThanTarget?.Invoke();
-                Debug.Log("Invoking enemy more than target event");
+                Debug.Log("Invoking enemymorethantarget event");
                 if (!enemiesMoving && canMovie)
                 {
                     StartCoroutine(MoveEnemiesToHelpers());
