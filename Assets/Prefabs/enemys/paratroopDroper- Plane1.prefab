@@ -149,6 +149,8 @@ MonoBehaviour:
   maxDropInterval: 1.5
   doubleDropChance: 0.1
   dropInterval: 0
+  minimumDropchance: 0.3
+  maximumDropchance: 0.55
 --- !u!70 &4029718123680439104
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

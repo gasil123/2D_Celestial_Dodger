@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretRaycast : MonoBehaviour
@@ -110,7 +111,8 @@ public class TurretRaycast : MonoBehaviour
 
         // Ensure the collider ends up exactly at the target position
         colliderToMove.transform.position = targetPosition;
-        colliderToMove.transform.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        colliderToMove.transform.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        colliderToMove.transform.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         colliderToMove.transform.gameObject.tag = "asd";
     }
 }

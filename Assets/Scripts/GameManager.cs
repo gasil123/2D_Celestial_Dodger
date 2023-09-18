@@ -4,12 +4,14 @@ using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] GameObject[] objectSpawners;
     [SerializeField] GameObject turret;
+    
 
     private void Awake()
     {
@@ -17,29 +19,31 @@ public class GameManager : MonoBehaviour
     }
     private void OnEnable()
     {
-    
-        InititilizeGameState(false);
+        EventManager.gameOver += GameOver;
     }
     private void OnDisable()
     {
- 
+        EventManager.gameOver -= GameOver;
     }
    
     public void StartGame()
     {
         InititilizeGameState(true);
     }
-    public void StopGame()
+    public void PauseGame()
     {
         InititilizeGameState(false);
-    }
-    public static void PauseGame()
-    {
         Time.timeScale = 0;
     }
-    public static void PlayGame()
+    public void PlayGame()
     {
         Time.timeScale = 1;
+        InititilizeGameState(true);
+    }
+    public void GameOver()
+    {
+        PauseGame();
+        CanvasManager.instance.GameOverPanel(true);
     }
     private void InititilizeGameState(bool state)
     {
@@ -49,6 +53,5 @@ public class GameManager : MonoBehaviour
         }
         turret.GetComponent<TurretController>().enabled = state;
         turret.GetComponent<PlayerInput>().enabled = state;
-        CanvasManager.instance.GamePanel(state);
     }
 }
