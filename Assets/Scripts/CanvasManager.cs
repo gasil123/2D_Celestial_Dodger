@@ -19,7 +19,7 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField] int _planeDestroyedScore = 10;
     [SerializeField] int _enemyDestroyedScore = 15;
-    [SerializeField] int _bulletCost = 2;
+    [SerializeField] int _bulletCost = 1;
 
     private const int score = 0;
     private  int currentScore = 0;

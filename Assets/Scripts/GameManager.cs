@@ -68,11 +68,6 @@ public class GameManager : MonoBehaviour
             turret.GetComponent<TurretController>().enabled = state;
             turret.GetComponent<PlayerInput>().enabled = state;
         }
-        else
-        {
-            turret.GetComponent<TurretController>().enabled = !state;
-            turret.GetComponent<PlayerInput>().enabled = !state;
-        }
     }
     public void QuitApplication() 
     {

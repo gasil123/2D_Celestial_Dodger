@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ public class TurretController : MonoBehaviour
     [SerializeField] PlayerInput _playerInput;
     private InputAction shootAction;
 
+    private Action<InputAction.CallbackContext> shootActionCallback;
+
     private Rigidbody2D rb;
     private float currentRotation;
 
@@ -19,15 +22,18 @@ public class TurretController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         fireEffectAnimator = fireEffect.GetComponent<Animator>();
+       
     }
     private void OnEnable()
     {
+        _playerInput = GetComponent<PlayerInput>();
         shootAction = _playerInput.actions["Fire"];
-        shootAction.performed += _ => Shoot();
+        shootActionCallback = _ => StartCoroutine(StartShooting());
+        shootAction.performed += shootActionCallback;
     }
     private void OnDisable()
     {
-        shootAction.performed -= _ => Shoot();
+        shootAction.performed -= shootActionCallback;
     }
     void FixedUpdate()
     {
@@ -43,10 +49,6 @@ public class TurretController : MonoBehaviour
         rb.rotation = -_newRotation;
         currentRotation = _newRotation;
     }
-    public void Shoot()
-    {
-        StartCoroutine(StartShooting());
-    }
     IEnumerator StartShooting()
     {
         EventManager.bulletfired?.Invoke();
@@ -54,7 +56,7 @@ public class TurretController : MonoBehaviour
         GameObject _bullets = GetBullet();
         _bullets.GetComponent<Projectile>().SetProjectileDirection(transform.up);
         fireEffectAnimator.GetComponent<Animator>().SetTrigger("shootEffect");
-        yield return new WaitForSeconds(2);
+        yield return null;
     }
     public GameObject GetBullet()
     {

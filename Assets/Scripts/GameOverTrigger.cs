@@ -15,7 +15,6 @@ public class GameOverTrigger : MonoBehaviour
     {
         var enemy = collision.gameObject.GetComponent<SoldierController>();
 
-        Debug.Log(collision.gameObject.name);
         if(enemy != null)
         {
             PlayExplosion();
