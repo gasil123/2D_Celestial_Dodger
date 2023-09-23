@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TurretRaycast : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyClimbHelpersLeft;
     [SerializeField] GameObject[] enemyClimbHelpersRight;
     [SerializeField] int _maximumEnemyForGameOver;
+
+    public LayerMask enemyLayer;
 
     public int numberOfEnemyHitOnRight;
     public int numberOfEnemyHitOnLeft;
@@ -57,33 +60,40 @@ public class TurretRaycast : MonoBehaviour
         enemiesMoving = false;
         canMovie = false;
     }
-
     IEnumerator MoveEnemiesToHelpers(GameObject[] helperPositions, Vector3 direction)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction);
-
-        for (int i = 0; i < helperPositions.Length; i++)
+        for(int i = 0; i < helperPositions.Length; i++)
         {
-            Collider2D colliderToMove = null;
-
-            foreach (RaycastHit2D hit in hits)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, enemyLayer);
+            if (hit.collider.tag == "Soldier1")
             {
-                if (hit.collider.CompareTag("Soldier1"))
-                {
-                    colliderToMove = hit.collider;
-                    break;
-                }
+                hit.collider.gameObject.GetComponent<NavMeshAgent>().SetDestination(helperPositions[i].transform.position);
             }
-            if (colliderToMove != null)
-            {
-                helperPositions[i].SetActive(true);
-                Vector3 targetPosition = helperPositions[i].transform.position;
-                StartCoroutine(SmoothMoveCollider(colliderToMove, targetPosition, 2f));
-
-               
-            }
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(5);
         }
+        yield return null;
+        //RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction);
+
+        //for (int i = 0; i < helperPositions.Length; i++)
+        //{
+        //    Collider2D colliderToMove = null;
+
+        //    foreach (RaycastHit2D hit in hits)
+        //    {
+        //        if (hit.collider.CompareTag("Soldier1"))
+        //        {
+        //            colliderToMove = hit.collider;
+        //            break;
+        //        }
+        //    }
+        //    if (colliderToMove != null)
+        //    {
+        //        helperPositions[i].SetActive(true);
+        //        Vector3 targetPosition = helperPositions[i].transform.position;
+        //        StartCoroutine(SmoothMoveCollider(colliderToMove, targetPosition, 2f));
+        //    }
+        //    yield return new WaitForSeconds(5f);
+        //}
     }
 
     private IEnumerator SmoothMoveCollider(Collider2D colliderToMove, Vector3 targetPosition, float moveDuration)
