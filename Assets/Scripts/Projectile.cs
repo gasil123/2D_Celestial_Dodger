@@ -21,13 +21,11 @@ public class Projectile : MonoBehaviour
         {
             EventManager.planeDestroyed?.Invoke();
             enemyScript?.Die();
-            Debug.Log("Enemy Destroyed");
         } 
         else if (soldierScript != null)
         {
             EventManager.enemyDestroyed?.Invoke();
             soldierScript?.Die();
-            Debug.Log("Enemy Destroyed");
         }
         gameObject.SetActive(false);
     }

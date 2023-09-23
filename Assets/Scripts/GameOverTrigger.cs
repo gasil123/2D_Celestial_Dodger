@@ -31,7 +31,6 @@ public class GameOverTrigger : MonoBehaviour
     {
         currentHealth -= currentHealthDecreaseValue;
         CanvasManager.instance.healthSlider.value -= currentHealthDecreaseValue;
-        Debug.Log(currentHealth);
         if (currentHealth < 10)
         {
             StartCoroutine(InvokeGameOver());

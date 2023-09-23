@@ -92,7 +92,6 @@ public class CanvasManager : MonoBehaviour
 
     private void UpdateScoreTextOnPlaneHit()
     {
-        Debug.Log("Updating score plane hit");
         scoreText.text = (currentScore += _planeDestroyedScore).ToString();
         UpdateHighScore();
     } 
