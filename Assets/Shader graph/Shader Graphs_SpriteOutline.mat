@@ -59,9 +59,9 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _thinkness: 0.005
+    - _thinkness: 0.0072
     m_Colors:
-    - _Color: {r: 1, g: 0.6869303, b: 0, a: 1}
+    - _Color: {r: 1024, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3640185848973940277
 MonoBehaviour:

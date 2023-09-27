@@ -63,9 +63,9 @@ public class CanvasManager : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         if (musicSlider != null  && SfxSlider!= null && muteToggle!=null)
         {
-            musicSlider.onValueChanged.AddListener(Audiomanager.instance.SetMusicVolume);
-            SfxSlider.onValueChanged.AddListener(Audiomanager.instance.SetSfxVolume);
-            muteToggle.onValueChanged.AddListener(Audiomanager.instance.MuteUnmute);
+            musicSlider.onValueChanged.AddListener(Audiomanager.Instance.SetMusicVolume);
+            SfxSlider.onValueChanged.AddListener(Audiomanager.Instance.SetSfxVolume);
+            muteToggle.onValueChanged.AddListener(Audiomanager.Instance.MuteUnmute);
         }
     }
     public void PauseMenu(bool state)

@@ -7,6 +7,7 @@ public class EnemyShip : MonoBehaviour
     [SerializeField] float deactivateTime;
     [SerializeField] GameObject _yellowBlast;
     private Animator _animator;
+    int deathAnimationId;
     public enum states
     {
         startMoving,
@@ -19,6 +20,7 @@ public class EnemyShip : MonoBehaviour
         SetDirection(transform.right);
         StartCoroutine(Deactivate());
         _yellowBlast.SetActive(false);
+        deathAnimationId = Animator.StringToHash("Death");
     }
     IEnumerator Deactivate()
     {
@@ -32,7 +34,7 @@ public class EnemyShip : MonoBehaviour
     public void Die()
     {
         _yellowBlast.SetActive(true);
-        _animator.SetTrigger("Death");
+        _animator.SetTrigger(deathAnimationId);
         StartCoroutine(Death());
     }
     IEnumerator Death()

@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 
 public class Audiomanager : MonoBehaviour
 {
-    public static Audiomanager instance;
+    public static Audiomanager Instance;
 
     public AudioMixer _mixer;
     [SerializeField] AudioSource _bgm;
@@ -22,7 +22,14 @@ public class Audiomanager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         DontDestroyOnLoad(gameObject);
     }
     private void Start()

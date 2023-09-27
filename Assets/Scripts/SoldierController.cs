@@ -4,21 +4,37 @@ using UnityEngine;
 public class SoldierController : MonoBehaviour
 {
     [SerializeField] float parachuteOpenYAxisValue = 3;
-    [SerializeField] float parachuteOpenGravityScale= 0.2f;
+    [SerializeField] float parachuteOpenGravityScale= 0.1f;
+    [SerializeField] float initialGravityScale= 0.8f;
 
     [SerializeField] Animator animator;
     [SerializeField] Transform foot;
     [SerializeField] Rigidbody2D _rb;
-
+    [SerializeField] GameObject blasrObject;
+    Animator blast;
     bool isGrounded = false;
+    int deathAnimId;
+    int jumpAnimId;
+    int idleAnimId;
+    private void Start()
+    {
+        blast = blasrObject.GetComponent<Animator>();
+        deathAnimId = Animator.StringToHash("Death");
+        jumpAnimId = Animator.StringToHash("Jump");
+        idleAnimId = Animator.StringToHash("Idle");
+        _rb.gravityScale = initialGravityScale;
+    }
     public void Die()
     {
-        animator?.SetBool("Death", true);
+        blasrObject.SetActive(true);
+        blast.SetTrigger(deathAnimId);
+        animator?.SetBool(deathAnimId, true);
         StartCoroutine(Death());
     }
     IEnumerator Death()
     {
         yield return new WaitForSeconds(0.2f);
+        blasrObject.SetActive(false);
         gameObject.SetActive(false);
     }
     private void Update()
@@ -32,17 +48,17 @@ public class SoldierController : MonoBehaviour
     {
         if (IsGrounded())
         {
-            animator.SetBool("Jump", false);
-            animator?.SetBool("Idle", true);
+            animator.SetBool(jumpAnimId, false);
+            animator?.SetBool(idleAnimId, true);
         }
     }
     private void JumpAnimation()
     {
         if(transform.position.y < parachuteOpenYAxisValue && !isGrounded)
         {
+            animator.SetBool(jumpAnimId, true);
             _rb.gravityScale = parachuteOpenGravityScale;
-            animator.SetBool("Jump", true);
-            animator?.SetBool("Idle", false);
+            animator?.SetBool(idleAnimId, false);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

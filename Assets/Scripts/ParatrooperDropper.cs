@@ -13,18 +13,34 @@ public class ParatrooperDropper : MonoBehaviour
 
     float paratrooperDropChance;
     int randomParatrooper;
+    public bool canDrop = true;
     private void OnEnable()
     {
+        EventManager.enemyMoreThanTarget += StopDropping;
         paratrooperDropChance = Random.Range(minimumDropchance, maximumDropchance);
         randomParatrooper = Random.Range(0, soldierNames.Length);
         dropInterval = Random.Range(minDropInterval, maxDropInterval);
         StartCoroutine(DropParatroopers());
+
+    }
+    private void OnDisable()
+    {
+        EventManager.enemyMoreThanTarget -= StopDropping;
+    }
+    private void StopDropping()
+    {
+        canDrop = false;
     }
     private IEnumerator DropParatroopers()
-    {      
-        bool dropTwo = Random.Range(0f, 1f) <= doubleDropChance;
+    {
+        if (!canDrop)
+        {
+            yield break; // Exit the coroutine if canDrop is false
+        }
+
         yield return new WaitForSeconds(dropInterval);
-        if (dropTwo)
+
+        if (Random.Range(0f, 1f) <= doubleDropChance)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -32,16 +48,12 @@ public class ParatrooperDropper : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
             }
         }
-        else
+        else if (Random.Range(0f, 1f) <= paratrooperDropChance)
         {
-            bool dropParatrooper = Random.Range(0f, 1f) <= paratrooperDropChance;
-
-            if (dropParatrooper)
-            {
-                SpawnSoldier();
-            }
+            SpawnSoldier();
         }
     }
+
     private void SpawnSoldier()
     {
         GameObject soldier = GetSoldier();

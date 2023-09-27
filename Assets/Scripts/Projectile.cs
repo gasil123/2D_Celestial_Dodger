@@ -4,10 +4,19 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] float _speed;
-
+    [SerializeField] TrailRenderer _trail;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+    private void OnEnable()
+    {
+        _trail.Clear();
+    }
+    private void FixedUpdate()
+    {
+        _trail.forceRenderingOff = false;
+        _trail.emitting = true;
     }
     public void SetProjectileDirection(Vector3 dir)
     {
@@ -27,6 +36,8 @@ public class Projectile : MonoBehaviour
             EventManager.enemyDestroyed?.Invoke();
             soldierScript?.Die();
         }
+        _trail.emitting = false;
+        _trail.forceRenderingOff = false;
         gameObject.SetActive(false);
     }
 }

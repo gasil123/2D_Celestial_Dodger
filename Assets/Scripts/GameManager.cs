@@ -44,8 +44,12 @@ public class GameManager : MonoBehaviour
     {
         PauseGame();
         _globalLight.color = Color.Lerp(_globalLight.color, Color.red, 2f);
-        Audiomanager.instance.PlayGameOver();
+        Audiomanager.Instance.PlayGameOver();
         CanvasManager.instance.GameOverPanel(true);
+    }
+    public void LoadScene(int num)
+    {
+        SceneManager.LoadScene(num);
     }
     public void StartLevel1()
     {
@@ -53,8 +57,8 @@ public class GameManager : MonoBehaviour
     }
     public void RetryLevel1()
     {
-        Audiomanager.instance.StopGameOver();
-        Audiomanager.instance.playBGM();
+        Audiomanager.Instance.StopGameOver();
+        Audiomanager.Instance.playBGM();
         SceneManager.LoadScene(1);
     }
     private void InititilizeGameState(bool state)

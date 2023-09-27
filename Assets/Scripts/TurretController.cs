@@ -52,7 +52,7 @@ public class TurretController : MonoBehaviour
     IEnumerator StartShooting()
     {
         EventManager.bulletfired?.Invoke();
-        Audiomanager.instance._turretFire.Play();
+        Audiomanager.Instance._turretFire.Play();
         GameObject _bullets = GetBullet();
         _bullets.GetComponent<Projectile>().SetProjectileDirection(transform.up);
         fireEffectAnimator.GetComponent<Animator>().SetTrigger("shootEffect");

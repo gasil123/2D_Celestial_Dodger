@@ -10,24 +10,15 @@ public class ObjectSpawner : MonoBehaviour
 
     private float range;
     private int num;
-    private bool canSpawn = true;
-    private void OnEnable()
+    public bool canSpawn;
+    private void Start()
     {
-        EventManager.enemyMoreThanTarget += DisableGameobject;
+        canSpawn = true;
         StartCoroutine(SpawnObjectsWithDelay());
-    }
-    private void OnDisable()
-    {
-        EventManager.enemyMoreThanTarget -= DisableGameobject;
-    }
-    private void DisableGameobject()
-    {
-        canSpawn = false;
-        gameObject.SetActive(false);
     }
     private IEnumerator SpawnObjectsWithDelay()
     {
-        while (canSpawn)
+        while (true)
         {
             range = Random.Range(minimumTimeForRepeatedFlightSpawning, maximumTimeForRepeatedFlightSpawning);
             yield return new WaitForSeconds(range);
