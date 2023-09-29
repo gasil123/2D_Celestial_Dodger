@@ -8,16 +8,23 @@ public class Audiomanager : MonoBehaviour
     public AudioMixer _mixer;
     [SerializeField] AudioSource _bgm;
     [SerializeField] AudioSource _gameOver;
+    public AudioSource _playerHurt;
     public AudioSource _turretFire;
+    public AudioSource _turretHurt;
+    public AudioSource _planeBlast;
 
-    
-    public void SetMusicVolume(float volume)
+    string bgmVol = "_BGMParameter";
+    string sfxVol = "_SfxParameter";
+
+    public void SetMusicVolume(float musicVolume)
     {
-        _mixer.SetFloat("_BGMParameter", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat(bgmVol, musicVolume);
+        _mixer.SetFloat(bgmVol, Mathf.Log10(musicVolume) * 20);
     }
-    public void SetSfxVolume(float volume)
+    public void SetSfxVolume(float sfxVolume)
     {
-        _mixer.SetFloat("_SfxParameter", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat(sfxVol, sfxVolume);
+        _mixer.SetFloat(sfxVol, Mathf.Log10(sfxVolume) * 20);
     }
 
     private void Awake()

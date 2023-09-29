@@ -33,13 +33,18 @@ public class EnemyShip : MonoBehaviour
     }
     public void Die()
     {
+      
+        Audiomanager.Instance._planeBlast.Play();
         _yellowBlast.SetActive(true);
         _animator.SetTrigger(deathAnimationId);
         StartCoroutine(Death());
+      
     }
     IEnumerator Death()
     {
         yield return new WaitForSeconds(0.16f);
         gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.16f);
+        Audiomanager.Instance._planeBlast.Stop();
     }
 }

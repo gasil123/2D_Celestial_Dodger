@@ -26,6 +26,12 @@ public class CanvasManager : MonoBehaviour
     private  int topScore = 0;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI topScoreText;
+
+    string bgmVol = "_BGMParameter";
+    string sfxVol = "_SfxParameter";
+
+    float bgmLevel = 0.3f;
+    float sfxLevel = 0.3f;
     private void Awake()
     {
         instance = this;
@@ -45,14 +51,19 @@ public class CanvasManager : MonoBehaviour
     }
     private void Start()
     {
+        InitializeUI();
+        SetSoundMechanics();
+    }
+    private void InitializeUI()
+    {
         currentScore = score;
         topScore = PlayerPrefs.GetInt("HighScore");
-        if (topScoreText!=null) topScoreText.text = topScore.ToString();
+        if (topScoreText != null) topScoreText.text = topScore.ToString();
         if (scoreText != null) scoreText.text = currentScore.ToString();
-        if (healthSlider!=null) healthSlider.value = 100;
+        if (healthSlider != null) healthSlider.value = 100;
         if (startPanlel != null) startPanlel.SetActive(true);
-        if (gameOverPanel!=null)gameOverPanel.SetActive(false);
-        if(SceneManager.GetActiveScene().buildIndex == 1) 
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             gamePanel.SetActive(true);
         }
@@ -61,11 +72,29 @@ public class CanvasManager : MonoBehaviour
             gamePanel.SetActive(false);
         }
         pauseMenuPanel.SetActive(false);
-        if (musicSlider != null  && SfxSlider!= null && muteToggle!=null)
+    }
+    private void SetSoundMechanics()
+    {
+        musicSlider?.onValueChanged.AddListener(Audiomanager.Instance.SetMusicVolume);
+        SfxSlider?.onValueChanged.AddListener(Audiomanager.Instance.SetSfxVolume);
+        muteToggle?.onValueChanged.AddListener(Audiomanager.Instance.MuteUnmute);
+        if (PlayerPrefs.HasKey(bgmVol))
         {
-            musicSlider.onValueChanged.AddListener(Audiomanager.Instance.SetMusicVolume);
-            SfxSlider.onValueChanged.AddListener(Audiomanager.Instance.SetSfxVolume);
-            muteToggle.onValueChanged.AddListener(Audiomanager.Instance.MuteUnmute);
+            bgmLevel = PlayerPrefs.GetFloat(bgmVol);
+            musicSlider.value = bgmLevel;
+        }
+        else
+        {
+            musicSlider.value = bgmLevel;
+        }
+        if (PlayerPrefs.HasKey(sfxVol))
+        {
+            sfxLevel = PlayerPrefs.GetFloat(sfxVol);
+            SfxSlider.value = sfxLevel;
+        }
+        else
+        {
+            SfxSlider.value = sfxLevel;
         }
     }
     public void PauseMenu(bool state)

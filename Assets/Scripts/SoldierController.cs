@@ -31,11 +31,17 @@ public class SoldierController : MonoBehaviour
         animator?.SetBool(deathAnimId, true);
         StartCoroutine(Death());
     }
+    bool hurt = false;
     IEnumerator Death()
     {
+        if(!Audiomanager.Instance._playerHurt.isPlaying) 
+            Audiomanager.Instance._playerHurt.Play();
+
         yield return new WaitForSeconds(0.2f);
         blasrObject.SetActive(false);
         gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        Audiomanager.Instance._playerHurt.Stop();
     }
     private void Update()
     {

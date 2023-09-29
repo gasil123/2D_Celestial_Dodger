@@ -23,6 +23,7 @@ public class GameOverTrigger : MonoBehaviour
     }
     private void PlayExplosion()
     {
+        Audiomanager.Instance._turretHurt.Play();
         explosion.transform.position = transform.position;
         explosion.SetActive(true);
         explosion.GetComponent<Animator>().SetTrigger("Death");
